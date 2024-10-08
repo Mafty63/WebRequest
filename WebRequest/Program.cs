@@ -21,13 +21,17 @@ class Program
                 {
                     using (var reader = new StreamReader(response.GetResponseStream()))
                     {
-                        string responseString = reader.ReadToEnd();
+                        var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
                         dynamic obj = JsonConvert.DeserializeObject(responseString);
-                        Console.WriteLine(responseString);
+                       // Console.WriteLine(responseString);
 
                         foreach (var university in obj)
                         {
-                            Console.WriteLine($"Name: {university.name}, Country: {university.country}");
+                            Console.WriteLine("----------------------------------------------------");
+                            Console.WriteLine("Name   : " + university.name); 
+                            Console.WriteLine("Country: " + university.country);
+                            Console.WriteLine("Website: " + String.Join(",",university.web_pages));
+                            Console.WriteLine("----------------------------------------------------");
                         }
                     }
                 }
